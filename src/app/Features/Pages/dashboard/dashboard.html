@@ -1,0 +1,39 @@
+<div class="dashboard-container">
+  <header>
+    <h1>Dashboard</h1>
+    <p>Bienvenido al panel de control de tu barbería</p>
+  </header>
+
+  <div class="stats-grid">
+    <app-card 
+        title="Citas Hoy" value="{{ dailyAppointments().length }}" 
+        iconClass="fas fa-calendar" 
+        iconBgColor="#3b82f6">
+    </app-card>
+
+    <app-card
+        title="Huecos disponibles" value="4" 
+        trendText="+3 desde ayer" iconClass="fas fa-calendar-plus" 
+        iconBgColor="#10b981">
+    </app-card>
+
+    <app-card 
+        title="Empleados Activos" value="8" 
+        trendText="2 disponibles ahora" iconClass="fas fa-users" 
+        iconBgColor="#10b981">
+    </app-card>
+
+    <app-card 
+        title="Productos vendidos" value="20" 
+        trendText="" iconClass="fas fa-box-open" 
+        iconBgColor="#a855f7">
+    </app-card>
+
+    
+    </div>
+
+  <div class="main-grid">
+    <div class="citas-section"> </div>
+    <div class="servicios-section"> </div>
+  </div>
+</div>

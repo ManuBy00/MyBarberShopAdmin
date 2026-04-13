@@ -1,0 +1,13 @@
+.layout-container {
+  display: flex; /* Alinea Sidebar y Main en horizontal */
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* Evita scroll doble en toda la página */
+}
+
+.main-content {
+  flex-grow: 1; /* El dashboard ocupará todo el espacio restante */
+  height: 100vh;
+  overflow-y: auto; /* Si el dashboard es largo, solo se mueve esta parte */
+  background-color: #f8fafc; /* El color gris claro del diseño */
+}

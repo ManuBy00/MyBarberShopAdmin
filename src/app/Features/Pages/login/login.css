@@ -1,0 +1,180 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f5f9;
+  font-family: 'Inter', sans-serif;
+}
+
+.login-box {
+  display: flex;
+  width: 1000px;
+  height: 600px;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+/* Lado Visual */
+.login-visual {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=2070') center/cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 40px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(17, 26, 45, 0.9) 0%, rgba(248, 153, 0, 0.4) 100%);
+}
+
+.visual-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.logo i {
+  background: #f89900;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+/* Sección Formulario */
+.login-form-section {
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 15px;
+  color: #94a3b8;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.input-wrapper input:focus {
+  border-color: #f89900;
+  box-shadow: 0 0 0 4px rgba(248, 153, 0, 0.1);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 32px;
+}
+
+.form-options a {
+  color: #f89900;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background-color: #111a2d;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #1e293b;
+}
+
+.footer-text {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.footer-text a {
+  color: #f89900;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.error-banner {
+  background-color: #fee2e2; /* Rojo muy clarito */
+  color: #b91c1c;           /* Rojo oscuro para el texto */
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #fecaca;
+  animation: fadeIn 0.3s ease; /* Un pequeño efecto al aparecer */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

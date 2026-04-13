@@ -1,0 +1,51 @@
+.card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between; /* Empuja info a la izquierda e icono a la derecha */
+  align-items: flex-start; /* <--- CAMBIO: Alinea al tope para que el icono esté junto al título */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  min-height: 120px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  /* Ya no necesita width 100% para no empujar al icono fuera */
+}
+
+.card-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500; /* Ni muy fina ni muy gruesa */
+  font-size: 0.85rem;
+  letter-spacing: 0.02em; /* Un pelín de espacio entre letras queda muy Pro */
+  color: #8a94a6;
+}
+
+/* El icono se mantiene igual, pero ahora se posicionará arriba a la derecha por el flex-start de la card */
+.card-icon {
+  width: 45px; /* Lo he hecho un pelín más pequeño para que encaje mejor con el título */
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.1rem;
+  flex-shrink: 0; /* Evita que el icono se aplaste si el texto es muy largo */
+}
+
+.card-value {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700; /* Negrita fuerte para que resalte el número */
+  font-size: 1.75rem;
+  color: #1e293b;
+}
+
+.card-trend {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; /* Un poco de peso para que se lea bien a pesar de ser pequeño */
+  font-size: 0.8rem;
+}

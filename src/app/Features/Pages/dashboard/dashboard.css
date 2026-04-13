@@ -1,0 +1,31 @@
+.dashboard-container {
+  padding: 30px;
+  background-color: #f8fafc; /* Gris muy clarito de fondo */
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+/* Las 4 cards de arriba */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* La parte de abajo (2 columnas de distinto tamaño) */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; /* La lista de citas es más ancha */
+  gap: 25px;
+}
+
+/* Estilo de la card (resumen) */
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}

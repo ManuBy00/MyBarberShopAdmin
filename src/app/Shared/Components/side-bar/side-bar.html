@@ -1,0 +1,53 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-container">
+      <i class="fas fa-cut"></i> </div>
+    <div class="header-text">
+      <span class="brand-name">BarberPro</span>
+      <span class="sub-title">Panel de Control</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul>
+      <li class="active">
+        <i class="fas fa-th-large"></i>
+        <span>Dashboard</span>
+      </li>
+      <li>
+        <i class="far fa-calendar-alt"></i>
+        <span>Citas</span>
+      </li>
+      <li>
+        <i class="fas fa-users"></i>
+        <span>Empleados</span>
+      </li>
+      <li>
+        <i class="far fa-file-alt"></i>
+        <span>Facturación</span>
+      </li>
+      <li>
+        <i class="fas fa-box"></i>
+        <span>Productos</span>
+      </li>
+      <li>
+        <i class="fas fa-cogs"></i>
+        <span>Cerrar sesión</span>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+   
+    <button class="btn-logout" (click)="authService.logout()">
+    <i class="fas fa-sign-out-alt"></i> 
+    <span>Cerrar sesión</span>
+    </button>
+    
+  
+    <div class="user-card">
+      <span class="user-name">{{ user() }}</span>
+      <span class="user-email">admin@barberpro.com</span>
+    </div>
+  </div>
+</div>
