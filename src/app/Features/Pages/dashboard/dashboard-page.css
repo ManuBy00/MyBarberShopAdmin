@@ -18,7 +18,7 @@ header {
 /* La parte de abajo (2 columnas de distinto tamaño) */
 .main-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr; /* La lista de citas es más ancha */
+  grid-template-columns: 1fr 1fr; /* La lista de citas es más ancha */
   gap: 25px;
 }
 
@@ -29,3 +29,4 @@ header {
   padding: 20px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
+

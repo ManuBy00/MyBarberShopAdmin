@@ -1,0 +1,43 @@
+.appointment-item {
+  background-color: #f8fafc;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Columnas de información */
+.appointment-info-izq,
+.appointment-info-der {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.appointment-info-der {
+  align-items: flex-end; /* Alinea el texto a la derecha */
+}
+
+/* Tipografía de los elementos */
+.costumer-name {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.service-type {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.time {
+  font-weight: 600;
+  color: #d97706; /* Naranja/Ámbar */
+  font-size: 0.95rem;
+}
+
+.employee-name {
+  color: #64748b;
+  font-size: 0.85rem;
+}

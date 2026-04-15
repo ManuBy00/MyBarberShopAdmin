@@ -1,0 +1,54 @@
+<div class="page-container">
+  <header class="page-header">
+    <div class="title-group">
+      <h1>Gestión de Citas</h1>
+      <p>Administra las citas de tus clientes</p>
+    </div>
+    <button class="btn-primary">
+      <i class="fas fa-plus"></i> Nueva Cita
+    </button>
+  </header>
+
+  <section class="filters-card">
+    <div class="date-selector">
+      <label><i class="fas fa-calendar-alt"></i> Fecha:</label>
+      <input type="date" [value]="selectedDate()" (change)="onDateChange($event)">
+      <button class="btn-today" (click)="setToday()">Hoy</button>
+    </div>
+    <div class="date-info">
+      <strong>{{ appointments().length }}</strong> citas para el {{ dateLabel() }}
+    </div>
+  </section>
+
+  <div class="search-container">
+    <i class="fas fa-search"></i>
+    <input type="text" placeholder="Buscar por cliente, teléfono o servicio..." (input)="onSearch($event)">
+  </div>
+
+  <div class="table-card">
+    <div class="table-header">
+      <div>Cliente</div>
+      <div>Teléfono</div>
+      <div>Servicio</div>
+      <div>Empleado</div>
+      <div>Fecha</div>
+      <div>Hora</div>
+      <div>Estado</div>
+      <div>Acciones</div>
+    </div>
+
+    <div class="table-body">
+      @if (appointments().length > 0) {
+        @for (item of appointments(); track item.id) {
+          <div class="table-row">
+            </div>
+        }
+      } @else {
+        <div class="empty-state">
+          <i class="fas fa-calendar-times"></i>
+          <p>No hay citas programadas para esta fecha</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

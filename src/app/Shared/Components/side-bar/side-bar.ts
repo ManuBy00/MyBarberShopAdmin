@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/auth/auth-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.css',
 })
@@ -12,6 +13,7 @@ export class SideBar {
   email = signal<string>('email');
 
   authService = inject(AuthService);
+
 
 
   ngOnInit() {

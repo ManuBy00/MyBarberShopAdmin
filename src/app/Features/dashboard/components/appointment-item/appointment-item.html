@@ -1,0 +1,10 @@
+<div class="appointment-item">
+      <div class="appointment-info-izq">
+        <span class="costumer-name">{{ clientName() }}</span>
+        <span class="service-type">{{ serviceType() }}</span>
+      </div>
+      <div class="appointment-info-der">
+        <span class="time">{{ appointmentTime() |slice:0:5 }}</span>
+        <span class="employee-name">{{ employeeName() }}</span>
+      </div>
+    </div>

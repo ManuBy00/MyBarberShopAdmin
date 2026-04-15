@@ -66,32 +66,45 @@
 }
 
 .sidebar-nav li {
+  margin-bottom: 8px; /* Solo espacio entre elementos */
+  display: block;
+}
+
+/* El enlace (<a>) es ahora el que se comporta como el botón */
+.sidebar-nav li a {
   display: flex;
   align-items: center;
   padding: 12px 15px;
-  margin-bottom: 8px;
   border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  text-decoration: none; /* Quita el subrayado */
   color: var(--text-white);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-.sidebar-nav li i {
+.sidebar-nav li a i {
   margin-right: 15px;
   width: 20px;
   font-size: 1.1rem;
+  text-align: center;
 }
 
-.sidebar-nav li span {
+.sidebar-nav li a span {
   font-weight: 500;
 }
 
-/* Active and Hover States */
-.sidebar-nav li.active {
+/* Active and Hover States (Aplicados al <a>) */
+
+/* Estado Activo: Gestionado por Angular con routerLinkActive */
+.sidebar-nav li a.active {
   background-color: var(--accent-orange);
+  color: white;
 }
 
-.sidebar-nav li:hover:not(.active) {
+/* Estado Hover: Solo si no está activo */
+.sidebar-nav li a:hover:not(.active) {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
@@ -119,38 +132,32 @@
   color: var(--text-muted);
 }
 
+/* Botón de Logout */
 .btn-logout {
-  /* Reseteamos el botón para que parezca un elemento de lista */
   display: flex;
   align-items: center;
-  gap: 15px; /* Espacio entre icono y texto */
+  gap: 15px;
   width: 100%;
   padding: 12px 20px;
   background: transparent;
   border: none;
-  color: #ffffff; /* Texto blanco como los demás */
+  color: #ffffff;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  border-radius: 12px; /* Redondeado igual que el botón naranja */
+  border-radius: 12px;
   transition: all 0.3s ease;
   text-align: left;
+  margin-bottom: 10px;
 }
 
-/* El icono */
 .btn-logout i {
-  width: 20px; /* Ancho fijo para que todos los iconos alineen igual */
+  width: 20px;
   font-size: 1.2rem;
 }
 
-/* Efecto Hover (Igual que el naranja del Dashboard) */
 .btn-logout:hover {
-  background-color: #f39c12; /* El naranja que usas en el Dashboard */
+  background-color: #f39c12;
   color: white;
-}
-
-/* Si quieres que el botón esté un poco separado de la caja del usuario */
-.btn-logout {
-  margin-bottom: 10px;
 }

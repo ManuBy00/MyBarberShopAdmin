@@ -1,0 +1,50 @@
+/* Estilos generales para que se vea bien en cualquier fondo */
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Contenedor principal de la tarjeta */
+.citas-card {
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  border: 1px solid #f1f3f5;
+}
+
+/* Cabecera */
+.citas-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f3f5;
+  gap: 10px;
+}
+
+.citas-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.icon-clock {
+  width: 22px;
+  height: 22px;
+  color: #d97706; /* Color naranja del icono */
+}
+
+/* Cuerpo de la tarjeta */
+.citas-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espacio entre cada cita */
+}
+
+

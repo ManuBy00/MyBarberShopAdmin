@@ -10,3 +10,14 @@ html, body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+a {
+  text-decoration: none; /* Quita el subrayado */
+  color: inherit;         /* Hereda el color del padre (muy útil) */
+}
+
+/* Opcional: para que no cambie de color al hacer clic o haberlo visitado */
+a:visited, a:active, a:focus {
+  color: inherit;
+  outline: none;
+}

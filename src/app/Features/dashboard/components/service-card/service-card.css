@@ -1,0 +1,74 @@
+/* Contenedor principal de la tarjeta */
+.services-card {
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.02);
+  border: 1px solid #f1f5f9;
+  overflow: hidden;
+}
+
+/* Cabecera */
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 12px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a; 
+}
+
+.icon-box {
+  width: 20px;
+  height: 20px;
+  color: #8b5cf6; 
+}
+
+/* Cuerpo de la tarjeta */
+.card-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+}
+
+/* Fila de cada servicio */
+.service-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Información central (Texto) */
+.item-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1; 
+  /* Se ha eliminado el margin-left porque ya no hay número de posición a la izquierda */
+}
+
+.service-name {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+/* Insignia numérica (Cantidad) */
+.item-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f3ff; 
+  color: #8b5cf6; 
+  font-weight: 700;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+}

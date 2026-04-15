@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { AuthResponse } from '../../entities/auth';
+import { AuthResponse } from '../../dto/auth';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 

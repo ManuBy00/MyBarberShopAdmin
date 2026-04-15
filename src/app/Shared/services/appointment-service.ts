@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Appointment } from '../entities/appointment';
+import { DashboardData } from '../dto/dashboard-data';
 
 
 
@@ -17,5 +18,7 @@ export class AppointmentService {
     return this.http.get<Appointment[]>(`${this.apiUrl}/search/daily`, { params });
   }
 
-  
+  getDashboardData(): Observable<DashboardData> {
+    return this.http.get<DashboardData>(`${this.apiUrl}/rightDataDashboard`);
+  }
 }
