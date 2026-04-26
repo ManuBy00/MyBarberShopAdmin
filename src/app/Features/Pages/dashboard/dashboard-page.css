@@ -1,10 +1,23 @@
 .dashboard-container {
-  padding: 30px;
+  padding: 2rem;
   background-color: #f8fafc; /* Gris muy clarito de fondo */
+  
 }
 
 header {
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  
+}
+
+header p {
+  color: #64748b;
+  margin: 0.2rem 0 0 0;
 }
 
 /* Las 4 cards de arriba */

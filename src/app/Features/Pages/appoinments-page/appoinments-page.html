@@ -4,16 +4,37 @@
       <h1>Gestión de Citas</h1>
       <p>Administra las citas de tus clientes</p>
     </div>
-    <button class="btn-primary">
+    <button class="btn-primary" (click)="openCreateModal()">
       <i class="fas fa-plus"></i> Nueva Cita
     </button>
+
+    @if (showModal()) {
+      <div class="modal-overlay">
+    <div class="modal-container">
+      <app-appointment-form 
+        [appointmentToEdit]="selectedAppointment()"
+        (close)="closeModal()" 
+        (saved)="handleSave($event)">
+      </app-appointment-form>
+    </div>
+  </div>
+    }
   </header>
 
   <section class="filters-card">
     <div class="date-selector">
       <label><i class="fas fa-calendar-alt"></i> Fecha:</label>
-      <input type="date" [value]="selectedDate()" (change)="onDateChange($event)">
+      <input type="date" [value]="selectedDate()" (change)="onDateChange($event)" id="dateInput">
+
       <button class="btn-today" (click)="setToday()">Hoy</button>
+
+      <label for=""> Filtros: </label>
+      <select #employeeSelect name="employees" id="employeesSelect" (change)="employeeFilter(employeeSelect.value)">
+        <option value="all">Todos los empleados</option>
+        @for (item of employees(); track item.id) {
+          <option value="{{ item.id }}">{{ item.name }}</option>
+        }
+      </select>
     </div>
     <div class="date-info">
       <strong>{{ appointments().length }}</strong> citas para el {{ dateLabel() }}
@@ -39,9 +60,26 @@
 
     <div class="table-body">
       @if (appointments().length > 0) {
-        @for (item of appointments(); track item.id) {
+        @for (item of filteredAppointments(); track item.id) {
           <div class="table-row">
+            <div>{{ item.customerName }}</div>
+            <div>{{ item.telNumber }}</div>
+            <div>{{ item.serviceName }}</div>
+            <div>{{ item.employeeName }}</div>
+            <div>{{ item.date }}</div>
+            <div>{{ item.startTime }}</div>
+            <div>
+              <span class="status" [class]="item.status">{{ item.status }}</span>
             </div>
+            <div class="actions">
+              <button class="btn-icon edit" (click)="openEditModal(item)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn-icon delete" (click)="onCancel(item)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
         }
       } @else {
         <div class="empty-state">

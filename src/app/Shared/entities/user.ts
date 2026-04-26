@@ -5,6 +5,7 @@ export interface User {
   id?: number;           
   name: string;
   email: string;
+  telNumber: string;
   role: UserRole;
   registerDate?: string; 
   

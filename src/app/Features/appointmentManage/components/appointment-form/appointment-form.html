@@ -1,0 +1,85 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    
+    <header class="modal-header">
+      <h2>{{ title() }}</h2>
+      <button class="btn-close" (click)="onClose()">
+        <i class="fas fa-times"></i>
+      </button>
+    </header>
+
+    <div class="modal-body">
+      <form class="appointment-form" [formGroup]="dataInputs">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="client">Cliente *</label>
+            <input 
+                type="text" 
+                formControlName="clientName" 
+                (input)="searchUsersByName($event)"
+                placeholder="Escribe para buscar cliente..."
+                autocomplete="off">
+
+            @if (showResults() && users().length > 0) {
+                <ul class="search-results">
+                    @for (c of users(); track c.id) {
+                    <li (click)="selectUser(c)">
+                    <span class="name">{{ c.name }}</span>
+                    <span class="phone">{{ c.telNumber }}</span>
+                    </li>
+                    }
+                </ul>
+            }     
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Teléfono *</label>
+            <input type="tel" id="phone" name="phone" placeholder="Ej: 600123456" formControlName="phone" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="service">Servicio *</label>
+            <select id="service" name="service" formControlName="service" required>
+              @for (item of services(); track $index) {
+                <option value="{{ item.id }}">{{ item.name }}</option>
+              }
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="employee">Empleado *</label>
+            <select id="employee" name="employee" class="input-focused" formControlName="employee" required (change)="updateAvailability()">
+                <option value="" disabled selected>Seleccionar empleado</option>
+                @for (item of employees(); track $index) {
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                }
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Fecha *</label>
+            <input type="date" id="date" name="date" formControlName="date" (change)="updateAvailability()" required>
+          </div>
+          <div class="form-group">
+            <label for="time">Hora *</label>
+            <select id="time" name="time" class="input-focused" formControlName="time"  required>
+              <option value="" disabled selected>Seleccionar hora</option>
+              @for (item of avaiability(); track $index) {
+                <option value="{{ item }}">{{ item }}</option>
+              }
+            </select>   
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <footer class="modal-footer">
+      <button class="btn btn-secondary" (click)="onClose()">Cancelar</button>
+      <button class="btn btn-primary" type="submit"  (click)="onSubmit()">Crear Cita</button>
+    </footer>
+
+  </div>
+</div>

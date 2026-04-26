@@ -4,13 +4,14 @@ export interface Appointment {
   startTime: string;     // Format: "HH:mm"
   endTime: string;      // Usually calculated by the backend
   status: AppointmentStatus;
+  telNumber: string;
   
   // IDs for POST/PUT operations
   customerId: number;
   employeeId: number;
   serviceId: number;
 
-  // Optional fields for UI display (populated via DTO)
+  // fields for UI display (populated via DTO)
   customerName: string;
   employeeName: string;
   serviceName: string;

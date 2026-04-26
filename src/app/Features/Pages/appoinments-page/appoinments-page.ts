@@ -1,16 +1,41 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { AppointmentService } from '../../../Shared/services/appointment-service';
+import { Appointment } from '../../../Shared/entities/appointment';
+import Swal from 'sweetalert2';
+import { AppointmentForm } from '../../appointmentManage/components/appointment-form/appointment-form';
+import { AppointmentDTO } from '../../../Shared/entities/appointmentDTO';
+import { EmployeesService } from '../../../Shared/services/employees-service';
+import { Employee } from '../../../Shared/entities/employee';
 
 @Component({
   selector: 'app-appoinments-page',
-  imports: [],
+  imports: [AppointmentForm],
   templateUrl: './appoinments-page.html',
   styleUrl: './appoinments-page.css',
 })
 export class AppoinmentsPage {
-  appointments = signal<any[]>([]);
-  selectedDate = signal<string>(new Date().toISOString().split('T')[0]);
+  appointmentService = inject(AppointmentService); 
+  employeesService = inject(EmployeesService);
 
-  // Esto genera el texto "miércoles, 15 de abril de 2026" automáticamente
+  appointments = signal<Appointment[]>([]);
+  selectedDate = signal<string>(new Date().toISOString().split('T')[0]);
+  showModal = signal(false);
+  employees = signal<Employee[]>([]);
+  selectedAppointment = signal<Appointment | null>(null);
+
+  // Nuevo estado para el filtro de empleado
+  filterEmployeeId = signal<string>("all");
+  // Computed para filtrar las citas según el empleado seleccionado
+  filteredAppointments = computed(() => {
+  const appointments = this.appointments();
+  const filter = this.filterEmployeeId();
+
+  if (filter === "all") return appointments;
+  
+  return appointments.filter(app => app.employeeId === Number(filter));
+});
+
+  
   dateLabel = computed(() => {
     return new Date(this.selectedDate()).toLocaleDateString('es-ES', {
       weekday: 'long',
@@ -20,16 +45,114 @@ export class AppoinmentsPage {
     });
   });
 
+  ngOnInit() {
+    this.loadEmployees();
+    this.onDateChange({ target: { value: this.selectedDate() } }); 
+  }
+
+
+  loadEmployees() {
+    this.employeesService.getEmployees().subscribe(employees => {
+      this.employees.set(employees);
+    }); 
+  }
+
+
+
   setToday() {
     this.selectedDate.set(new Date().toISOString().split('T')[0]);
+    this.onDateChange({ target: { value: this.selectedDate() } }); // Simula un cambio de fecha para cargar las citas de hoy
   }
 
   onDateChange(event: any) {
     this.selectedDate.set(event.target.value);
-    // Aquí llamarías a tu servicio para recargar las citas de esa fecha
+    this.appointmentService.getDailyAppointments(this.selectedDate()).subscribe(appointments => {
+      this.appointments.set(appointments);
+    });
   }
 
+
   onSearch(event: Event) {
-    // Aquí llamarías a tu servicio para buscar citas por el término ingresado
+    
   }
+
+  onCancel(appointment: Appointment) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true, 
+      confirmButtonText: 'Sí, cancelar',
+      cancelButtonText: 'No, mantener',
+      confirmButtonColor: '#f89900',
+      cancelButtonColor: '#64748b',
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.appointmentService.deleteAppointment(appointment.id).subscribe(() => {
+          Swal.fire('Eliminada', 'La cita ha sido eliminada', 'success');
+          // Actualiza la lista de citas después de cancelar
+          this.onDateChange({ target: { value: this.selectedDate() } });
+        }, error => {
+          Swal.fire('Error', 'No se pudo eliminar la cita', 'error');
+        });
+      }
+    });
+  }
+
+  openCreateModal() {
+    this.selectedAppointment.set(null);
+    this.showModal.set(true);
+  }
+
+  openEditModal(appointment: Appointment) {
+    this.selectedAppointment.set(appointment);
+    this.showModal.set(true);
+  }
+
+  closeModal() {
+    this.showModal.set(false);
+  }
+
+  handleSave(appointment: AppointmentDTO) {
+    if (this.selectedAppointment()) {
+      this.updateAppointment(appointment);
+      this.onDateChange({ target: { value: this.selectedDate() } }); // Recarga las citas para mostrar la actualización
+    } else {
+      this.saveNewAppointment(appointment);
+    }
+  }
+
+  employeeFilter(employeeId: string) {
+  this.filterEmployeeId.set(employeeId);
+}
+
+saveNewAppointment(appointment: AppointmentDTO) {
+   this.appointmentService.createAppointment(appointment).subscribe(() => {
+      Swal.fire('Creada', 'La cita ha sido creada exitosamente', 'success');
+      this.onDateChange({ target: { value: this.selectedDate() } }); // Recarga las citas para mostrar la nueva
+    }, error => {
+      Swal.fire('Error', 'No se pudo crear la cita', 'error');
+    });
+    this.closeModal(); // Cierra el modal después de guardar
+
+}
+
+updateAppointment(appointment: AppointmentDTO) {
+  this.appointmentService.updateAppointment(appointment.id ?? 0, appointment).subscribe({
+      next: (updatedApp) => {
+        Swal.fire('Actualizada', 'Cita modificada con éxito', 'success');
+        this.onDateChange({ target: { value: this.selectedDate() } }); // Recargamos la lista
+      },
+      error: (err) => {
+        // Aquí capturas el 409 Conflict o el 404
+        const msg = err.error || 'No se pudo actualizar la cita';
+        Swal.fire('Error', msg, 'error');
+      }
+    });
+}
+
+
+ 
+  
 }
