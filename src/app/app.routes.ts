@@ -19,13 +19,20 @@ export const routes: Routes = [
     children: [
         {
             path: 'dashboard',
-            component: DashboardPage 
+            loadComponent: () => import('./Features/Pages/dashboard/dashboard-page').then(m => m.DashboardPage)
         },
 
         {
             path: 'appointments',
-            component: AppoinmentsPage
+            loadComponent: () => import('./Features/Pages/appoinments-page/appoinments-page').then(m => m.AppoinmentsPage)
+        },
+
+        {
+            path: 'employees',
+            loadComponent: () => import('./Features/Pages/employees-page/employees-page').then(m => m.EmployeesPage)
         }
+
+        
     ]
     }
 ];

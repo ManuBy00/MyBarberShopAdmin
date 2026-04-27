@@ -1,0 +1,54 @@
+<div class="page-container">
+  <div class="header-section">
+    <div class="title-block">
+      <h1>Gestión de Empleados</h1>
+      <p>Administra tu equipo de trabajo</p>
+    </div>
+    <button class="btn-primary">+ Nuevo Empleado</button>
+  </div>
+
+  <div class="stats-grid">
+    <app-card
+        title="Total empleados" value="{{employees().length}}" 
+        trendText="" iconClass="fas fa-users" 
+        iconBgColor="#3b82f6">
+    </app-card>
+
+    <app-card
+        title="Empleados activos" value="{{ activeEmployees() }}" 
+        trendText="" iconClass="fas fa-user-check" 
+        iconBgColor="#10b981">
+    </app-card>
+
+    <app-card
+        title="Empleados inactivos" value="{{ inactiveEmployees() }}" 
+        trendText="" iconClass="fas fa-user-minus" 
+        iconBgColor="#F00F">
+    </app-card>
+  </div>
+
+  <div class="table-container">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Fecha Alta</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Juan Pérez</td>
+          <td>15/1/2024</td>
+          <td><span class="status-badge active">Activo</span></td>
+          <td class="actions">
+            <button class="btn-icon purple" title="Gestionar Bajas"><i class="fas fa-calendar-times"></i></button>
+            <button class="btn-icon blue" title="Editar"><i class="fas fa-pen"></i></button>
+            <button class="btn-icon red" title="Eliminar"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
