@@ -4,8 +4,16 @@
       <h1>Gestión de Empleados</h1>
       <p>Administra tu equipo de trabajo</p>
     </div>
-    <button class="btn-primary">+ Nuevo Empleado</button>
+    <button class="btn-primary" (click)="openModal()">+ Nuevo Empleado</button>
   </div>
+
+  @if (showModal()) {
+    <app-employee-form 
+      [employeeToEdit]="selectedEmployee()"
+      (close)="closeModal()" 
+      (save)="handleSave($event)">
+    </app-employee-form>
+  }
 
   <div class="stats-grid">
     <app-card
@@ -27,28 +35,7 @@
     </app-card>
   </div>
 
-  <div class="table-container">
-    <table class="custom-table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Fecha Alta</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Juan Pérez</td>
-          <td>15/1/2024</td>
-          <td><span class="status-badge active">Activo</span></td>
-          <td class="actions">
-            <button class="btn-icon purple" title="Gestionar Bajas"><i class="fas fa-calendar-times"></i></button>
-            <button class="btn-icon blue" title="Editar"><i class="fas fa-pen"></i></button>
-            <button class="btn-icon red" title="Eliminar"><i class="fas fa-trash"></i></button>
-          </td>
-        </tr>
-        </tbody>
-    </table>
-  </div>
+  <app-table [columns]="tableColumns" [data]="employees()" emptyMessage="No hay empleados registrados"
+      (onEdit)="openEditModal($event)" (onDelete)="deleteEmployee($event)" (onSpecialAction)="manageAbsences($event)">
+    </app-table>
 </div>

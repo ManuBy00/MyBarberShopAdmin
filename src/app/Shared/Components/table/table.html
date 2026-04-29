@@ -1,1 +1,46 @@
-<p>table works!</p>
+ <div class="table-card">
+    <div class="table-header"
+    [style.grid-template-columns]="'repeat(' + (columns().length + 1) + ', 1fr)'">
+        @for (col of columns(); track $index) {
+            <div>{{col.label}}</div>
+        }
+    </div>
+
+    <div class="table-body">
+      @if (data().length > 0) {
+        @for (item of data(); track item.id) {
+          <div class="table-row"
+          [style.grid-template-columns]="'repeat(' + (columns().length + 1) + ', 1fr)'">
+            @for (col of columns(); track col.key) {
+                @if (col.type === 'date') {
+                  {{item[col.key] | date: 'dd/MM/yy'}}
+                }
+                @else {
+                  <div>
+                    {{ item[col.key] }}
+                  </div>
+                }
+            }
+            
+            <div class="actions">
+                @if (item.active !== undefined) {
+                    <button class="btn-icon special" (click)="onSpecialAction.emit(item)">
+                        <i class="fas fa-calendar-times"></i>
+                    </button>
+                }
+              <button class="btn-icon edit" (click)="onEdit.emit(item)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn-icon delete" (click)="onDelete.emit(item)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="empty-state">
+          <i class="fas fa-calendar-times"></i>
+          <p>{{emptyMessage()}}</p>
+        </div>
+      }
+    </div>

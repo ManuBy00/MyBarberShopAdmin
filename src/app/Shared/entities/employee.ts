@@ -1,7 +1,7 @@
 export interface Employee {
-  id: number;           
+  id?: number;           
   name: string;
-  speciality: string;
+  hireDate: string;
   active: boolean; 
   
 }

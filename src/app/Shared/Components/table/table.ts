@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, input, Input, output } from '@angular/core';
+import { TableColumn } from './table-column';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './table.html',
   styleUrl: './table.css',
 })
 export class Table {
+  data = input<any[]>([]);
+  columns = input<TableColumn[]>([]);
+  emptyMessage = input<string>('No se han encontrado registros');
+
+  // Salidas para las acciones
+  onEdit = output<any>();
+  onDelete = output<any>();
+  onSpecialAction = output<any>();
 
 }

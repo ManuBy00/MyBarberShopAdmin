@@ -20,6 +20,10 @@ export class AppointmentService {
     return this.http.post<AppointmentDTO>(`${this.apiUrl}`, appointmentData);
   }
 
+  deleteAppointment(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
   updateAppointment(id: number, appointmentData: AppointmentDTO): Observable<AppointmentDTO> {
   const url = `${this.apiUrl}/${id}`;
   return this.http.put<AppointmentDTO>(url, appointmentData);
@@ -34,9 +38,7 @@ export class AppointmentService {
     return this.http.get<DashboardData>(`${this.apiUrl}/dashboardSummary`);
   }
 
-  deleteAppointment(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+
 
   getAvailability(date: string, employeeId: number, excludeId?: number): Observable<string[]> {
   let params = new HttpParams()

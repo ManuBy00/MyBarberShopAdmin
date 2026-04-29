@@ -46,47 +46,7 @@
     <input type="text" placeholder="Buscar por cliente, teléfono o servicio..." (input)="onSearch($event)">
   </div>
 
-  <div class="table-card">
-    <div class="table-header">
-      <div>Cliente</div>
-      <div>Teléfono</div>
-      <div>Servicio</div>
-      <div>Empleado</div>
-      <div>Fecha</div>
-      <div>Hora</div>
-      <div>Estado</div>
-      <div>Acciones</div>
-    </div>
-
-    <div class="table-body">
-      @if (appointments().length > 0) {
-        @for (item of filteredAppointments(); track item.id) {
-          <div class="table-row">
-            <div>{{ item.customerName }}</div>
-            <div>{{ item.telNumber }}</div>
-            <div>{{ item.serviceName }}</div>
-            <div>{{ item.employeeName }}</div>
-            <div>{{ item.date }}</div>
-            <div>{{ item.startTime }}</div>
-            <div>
-              <span class="status" [class]="item.status">{{ item.status }}</span>
-            </div>
-            <div class="actions">
-              <button class="btn-icon edit" (click)="openEditModal(item)">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="btn-icon delete" (click)="onCancel(item)">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        }
-      } @else {
-        <div class="empty-state">
-          <i class="fas fa-calendar-times"></i>
-          <p>No hay citas programadas para esta fecha</p>
-        </div>
-      }
-    </div>
-  </div>
+  <app-table [columns]="tableColumns" [data]="filteredAppointments()" emptyMessage="No hay citas programadas para esta fecha"
+      (onEdit)="openEditModal($event)" (onDelete)="onCancel($event)"> 
+      </app-table>
 </div>

@@ -3,13 +3,14 @@ import { form } from '@angular/forms/signals';
 import { Appointment } from '../../../../Shared/entities/appointment';
 import { AppointmentDTO } from '../../../../Shared/entities/appointmentDTO';
 import { AppointmentService } from '../../../../Shared/services/appointment-service';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee } from '../../../../Shared/entities/employee';
 import { EmployeesService } from '../../../../Shared/services/employees-service';   
 import { Service } from '../../../../Shared/entities/service';
 import { User } from '../../../../Shared/entities/user';
 import { UserService } from '../../../../Shared/services/user-service';
 import { HtmlParser } from '@angular/compiler';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -35,19 +36,22 @@ export class AppointmentForm {
   users = signal<User[]>([]); 
 
   appointmentToEdit = input<Appointment | null>(null);
+  private fb = inject(FormBuilder);
 
-  dataInputs = new FormGroup({
-    clientName: new FormControl('', Validators.required),
-    clientId: new FormControl(0, Validators.required), 
-    phone: new FormControl(''),
-    time: new FormControl(''),
-    date: new FormControl(''),
-    employee: new FormControl(0), 
-    service: new FormControl(0)
+  dataInputs = this.fb.group({
+    clientName: ['', Validators.required],
+    clientId: [0, Validators.required], 
+    phone: ['', Validators.required],
+    time: ['', Validators.required],
+    date: ['', Validators.required],
+    employee: [0, Validators.required], 
+    service: [0, Validators.required]
   });
 
   isEditMode = computed(() => !!this.appointmentToEdit());
   title = computed(() => this.isEditMode() ? 'Editar Cita' : 'Nueva Cita');
+  btnText = computed(()=> this.isEditMode() ? 'Editar' : 'Crear')
+
 
 
   ngOnInit() {
@@ -73,10 +77,16 @@ export class AppointmentForm {
     this.close.emit();
   }
 
-  onSubmit(): AppointmentDTO {
+  onSubmit() {
+    if (this.dataInputs.invalid){
+       Swal.fire('Formulario incompleto', 'Por favor, rellena todos los campos obligatorios (*)', 'error');
+        this.dataInputs.markAllAsTouched(); 
+        return;
+    }
+
     const newAppointment: AppointmentDTO = {
     id: this.appointmentToEdit()?.id, 
-    clientId:  Number(this.dataInputs.get('clientId')?.value ?? 0),
+    clientId: Number(this.dataInputs.get('clientId')?.value ?? 0),
     date: this.dataInputs.get('date')?.value ?? '',
     startTime: this.dataInputs.get('time')?.value ?? '',
     telNumber: this.dataInputs.get('phone')?.value ?? '',
@@ -85,25 +95,15 @@ export class AppointmentForm {
   };
 
     this.saved.emit(newAppointment);
-    return newAppointment;
   }
 
   loadAvailability() {
   const date = this.dataInputs.get('date')?.value;
   const employeeId = Number(this.dataInputs.get('employee')?.value);
 
-  // No disparamos la petición si falta información básica
+  
   if (!date || !employeeId) return;
-
-  // Calculamos el ID a excluir: solo si estamos en modo edición
-  const idToExclude = this.isEditMode() ? this.appointmentToEdit()?.id : undefined;
-
-  // DEBUG: Mira esto en la consola del navegador (F12 -> Console)
-  console.log('--- DEBUG AVAILABILITY ---');
-  console.log('Fecha:', date);
-  console.log('Empleado:', employeeId);
-  console.log('Modo Edición:', this.isEditMode());
-  console.log('ID a excluir:', idToExclude);
+  const idToExclude = this.isEditMode() ? this.appointmentToEdit()?.id : undefined
 
   // HACEMOS UNA SOLA LLAMADA (Paso el ID como tercer argumento)
   this.appointmentService.getAvailability(date, employeeId, idToExclude)

@@ -6,10 +6,11 @@ import { AppointmentForm } from '../../appointmentManage/components/appointment-
 import { AppointmentDTO } from '../../../Shared/entities/appointmentDTO';
 import { EmployeesService } from '../../../Shared/services/employees-service';
 import { Employee } from '../../../Shared/entities/employee';
+import { Table } from '../../../Shared/Components/table/table';
 
 @Component({
   selector: 'app-appoinments-page',
-  imports: [AppointmentForm],
+  imports: [AppointmentForm, Table],
   templateUrl: './appoinments-page.html',
   styleUrl: './appoinments-page.css',
 })
@@ -22,6 +23,18 @@ export class AppoinmentsPage {
   showModal = signal(false);
   employees = signal<Employee[]>([]);
   selectedAppointment = signal<Appointment | null>(null);
+
+  //columnas de la tabla
+  tableColumns = [
+    { label: 'Cliente', key: 'customerName' },
+    { label: 'Teléfono', key: 'telNumber' },
+    { label: 'Empleado', key: 'employeeName' },
+    { label: 'Servicio', key: 'serviceName' },
+    { label: 'Fecha', key: 'date' },
+    { label: 'Hora', key: 'startTime' },
+    { label: 'Estado', key: 'status' },
+
+  ]
 
   // Nuevo estado para el filtro de empleado
   filterEmployeeId = signal<string>("all");
