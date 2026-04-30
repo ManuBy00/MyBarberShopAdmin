@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { User } from '../entities/user';
+import { User } from '../../shared/models/entities/user';
 import { Observable } from 'rxjs';
 
 @Injectable({

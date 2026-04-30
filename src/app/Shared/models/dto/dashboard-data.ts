@@ -1,4 +1,4 @@
-import { ServiceCountDTO } from "./Service-count-dto";
+import { ServiceCountDTO } from "./service-count";
 
 export interface DashboardData {
     employeesNumber: number;

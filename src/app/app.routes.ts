@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { Layout } from './Shared/Components/layout/layout';
-import { DashboardPage } from './Features/Pages/dashboard/dashboard-page';
-import { Login } from './Features/Pages/login/login';
-import { authGuard } from './Shared/services/auth/auth.guard';
-import { AppoinmentsPage } from './Features/Pages/appoinments-page/appoinments-page';
+import { Layout } from './shared/Components/layout/layout';
+import { DashboardPage } from './features/dashboard/pages/dashboard-page/dashboard-page';
+import { Login } from './features/login/login';
+import { authGuard } from './core/auth/auth.guard';
+import { AppoinmentsPage } from './features/appointment/pages/appoinments-page/appoinments-page';
 
 export const routes: Routes = [
     { 
@@ -19,17 +19,17 @@ export const routes: Routes = [
     children: [
         {
             path: 'dashboard',
-            loadComponent: () => import('./Features/Pages/dashboard/dashboard-page').then(m => m.DashboardPage)
+            loadComponent: () => import('./features/dashboard/pages/dashboard-page/dashboard-page').then(m => m.DashboardPage)
         },
 
         {
             path: 'appointments',
-            loadComponent: () => import('./Features/Pages/appoinments-page/appoinments-page').then(m => m.AppoinmentsPage)
+            loadComponent: () => import('./features/appointment/pages/appoinments-page/appoinments-page').then(m => m.AppoinmentsPage)
         },
 
         {
             path: 'employees',
-            loadComponent: () => import('./Features/Pages/employees-page/employees-page').then(m => m.EmployeesPage)
+            loadComponent: () => import('./features/employees/pages/employees-page/employees-page').then(m => m.EmployeesPage)
         }
 
         

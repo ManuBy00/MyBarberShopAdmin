@@ -1,12 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { AppointmentService } from '../../../Shared/services/appointment-service';
-import { Appointment } from '../../../Shared/entities/appointment';
+import { AppointmentService } from '../../appointment-service';
+import { Appointment } from '../../../../shared/models/entities/appointment';
 import Swal from 'sweetalert2';
-import { AppointmentForm } from '../../appointmentManage/components/appointment-form/appointment-form';
-import { AppointmentDTO } from '../../../Shared/entities/appointmentDTO';
-import { EmployeesService } from '../../../Shared/services/employees-service';
-import { Employee } from '../../../Shared/entities/employee';
-import { Table } from '../../../Shared/Components/table/table';
+import { AppointmentForm } from '../../components/appointment-form/appointment-form';
+import { AppointmentRequest } from '../../../../shared/models/dto/appointment-request';
+import { EmployeesService } from '../../../employees/employees-service';
+import { Employee } from '../../../../shared/models/entities/employee';
+import { Table } from '../../../../shared/Components/table/table';
+
 
 @Component({
   selector: 'app-appoinments-page',
@@ -30,7 +31,7 @@ export class AppoinmentsPage {
     { label: 'Teléfono', key: 'telNumber' },
     { label: 'Empleado', key: 'employeeName' },
     { label: 'Servicio', key: 'serviceName' },
-    { label: 'Fecha', key: 'date' },
+    { label: 'Fecha', key: 'date', type: 'date'},
     { label: 'Hora', key: 'startTime' },
     { label: 'Estado', key: 'status' },
 
@@ -127,7 +128,7 @@ export class AppoinmentsPage {
     this.showModal.set(false);
   }
 
-  handleSave(appointment: AppointmentDTO) {
+  handleSave(appointment: AppointmentRequest) {
     if (this.selectedAppointment()) {
       this.updateAppointment(appointment);
       this.onDateChange({ target: { value: this.selectedDate() } }); // Recarga las citas para mostrar la actualización
@@ -140,7 +141,7 @@ export class AppoinmentsPage {
   this.filterEmployeeId.set(employeeId);
 }
 
-saveNewAppointment(appointment: AppointmentDTO) {
+saveNewAppointment(appointment: AppointmentRequest) {
    this.appointmentService.createAppointment(appointment).subscribe(() => {
       Swal.fire('Creada', 'La cita ha sido creada exitosamente', 'success');
       this.onDateChange({ target: { value: this.selectedDate() } }); // Recarga las citas para mostrar la nueva
@@ -151,7 +152,7 @@ saveNewAppointment(appointment: AppointmentDTO) {
 
 }
 
-updateAppointment(appointment: AppointmentDTO) {
+updateAppointment(appointment: AppointmentRequest) {
   this.appointmentService.updateAppointment(appointment.id ?? 0, appointment).subscribe({
       next: (updatedApp) => {
         Swal.fire('Actualizada', 'Cita modificada con éxito', 'success');

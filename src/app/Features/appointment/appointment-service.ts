@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Appointment } from '../entities/appointment';
-import { DashboardData } from '../dto/dashboard-data';
-import { Service } from '../entities/service';
-import { AppointmentDTO } from '../entities/appointmentDTO';
+import { Appointment } from '../../shared/models/entities/appointment';
+import { DashboardData } from '../../shared/models/dto/dashboard-data';
+import { Service } from '../../shared/models/entities/service';
+import { AppointmentRequest } from '../../shared/models/dto/appointment-request';
 
 
 
@@ -16,17 +16,17 @@ export class AppointmentService {
   private apiUrl = 'http://localhost:8080/appointments';
 
 
-  createAppointment(appointmentData: AppointmentDTO): Observable<AppointmentDTO> {
-    return this.http.post<AppointmentDTO>(`${this.apiUrl}`, appointmentData);
+  createAppointment(appointmentData: AppointmentRequest): Observable<AppointmentRequest> {
+    return this.http.post<AppointmentRequest>(`${this.apiUrl}`, appointmentData);
   }
 
   deleteAppointment(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  updateAppointment(id: number, appointmentData: AppointmentDTO): Observable<AppointmentDTO> {
+  updateAppointment(id: number, appointmentData: AppointmentRequest): Observable<AppointmentRequest> {
   const url = `${this.apiUrl}/${id}`;
-  return this.http.put<AppointmentDTO>(url, appointmentData);
+  return this.http.put<AppointmentRequest>(url, appointmentData);
 }
 
   getDailyAppointments(date: string): Observable<Appointment[]>{

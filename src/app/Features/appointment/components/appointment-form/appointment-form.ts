@@ -1,14 +1,14 @@
 import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { form } from '@angular/forms/signals';
-import { Appointment } from '../../../../Shared/entities/appointment';
-import { AppointmentDTO } from '../../../../Shared/entities/appointmentDTO';
-import { AppointmentService } from '../../../../Shared/services/appointment-service';
+import { Appointment } from '../../../../shared/models/entities/appointment';
+import { AppointmentRequest } from '../../../../shared/models/dto/appointment-request';
+import { AppointmentService } from '../../appointment-service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Employee } from '../../../../Shared/entities/employee';
-import { EmployeesService } from '../../../../Shared/services/employees-service';   
-import { Service } from '../../../../Shared/entities/service';
-import { User } from '../../../../Shared/entities/user';
-import { UserService } from '../../../../Shared/services/user-service';
+import { Employee } from '../../../../shared/models/entities/employee';
+import { EmployeesService } from '../../../employees/employees-service';
+import { Service } from '../../../../shared/models/entities/service';
+import { User } from '../../../../shared/models/entities/user';
+import { UserService } from '../../../../core/services/user-service';
 import { HtmlParser } from '@angular/compiler';
 import Swal from 'sweetalert2';
 
@@ -27,7 +27,7 @@ export class AppointmentForm {
   showResults = signal(false);
 
   close = output<void>();
-  saved = output<AppointmentDTO>();
+  saved = output<AppointmentRequest>();
 
 
   avaiability = signal<string[]>([]);
@@ -40,7 +40,7 @@ export class AppointmentForm {
 
   dataInputs = this.fb.group({
     clientName: ['', Validators.required],
-    clientId: [0, Validators.required], 
+    clientId: [0], 
     phone: ['', Validators.required],
     time: ['', Validators.required],
     date: ['', Validators.required],
@@ -84,7 +84,7 @@ export class AppointmentForm {
         return;
     }
 
-    const newAppointment: AppointmentDTO = {
+    const newAppointment: AppointmentRequest = {
     id: this.appointmentToEdit()?.id, 
     clientId: Number(this.dataInputs.get('clientId')?.value ?? 0),
     date: this.dataInputs.get('date')?.value ?? '',

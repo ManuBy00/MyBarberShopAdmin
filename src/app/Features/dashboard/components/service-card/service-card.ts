@@ -1,6 +1,6 @@
 import { Component, inject, input } from '@angular/core';
-import { DashboardPage } from '../../../Pages/dashboard/dashboard-page';
-import { ServiceCountDTO } from '../../../../Shared/dto/Service-count-dto';
+import { DashboardPage } from '../../pages/dashboard-page/dashboard-page';
+import { ServiceCountDTO } from '../../../../shared/models/dto/service-count';
 
 @Component({
   selector: 'app-service-card',

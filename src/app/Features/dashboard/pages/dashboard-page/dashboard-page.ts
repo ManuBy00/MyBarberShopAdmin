@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { Card } from '../../../Shared/Components/card/card';
-import { AppointmentService } from '../../../Shared/services/appointment-service';
-import { Appointment } from '../../../Shared/entities/appointment';
-import { AppointmentsCard } from '../../dashboard/components/appointments-card/appointments-card';
-import { ServiceCard } from '../../dashboard/components/service-card/service-card';
-import { DashboardData } from '../../../Shared/dto/dashboard-data';
+import { Card } from '../../../../shared/Components/card/card';
+import { AppointmentService } from '../../../appointment/appointment-service';
+import { Appointment } from '../../../../shared/models/entities/appointment';
+import { AppointmentsCard } from '../../components/appointments-card/appointments-card';
+import { ServiceCard } from '../../components/service-card/service-card';
+import { DashboardData } from '../../../../shared/models/dto/dashboard-data';
 
 
 @Component({

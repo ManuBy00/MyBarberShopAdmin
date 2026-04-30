@@ -2,7 +2,7 @@ import { Component, computed, inject, input, output, signal } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Employee } from '../../../Shared/entities/employee';
+import { Employee } from '../../../../shared/models/entities/employee';
 
 @Component({
   selector: 'app-employee-form',

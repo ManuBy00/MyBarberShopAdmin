@@ -1,10 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { Card } from '../../../Shared/Components/card/card';
-import { Employee } from '../../../Shared/entities/employee';
-import { EmployeesService } from '../../../Shared/services/employees-service';
-import { Table } from '../../../Shared/Components/table/table';
+import { Card } from '../../../../shared/Components/card/card';
+import { Employee } from '../../../../shared/models/entities/employee';
+import { EmployeesService } from '../../employees-service';
+import { Table } from '../../../../shared/Components/table/table';
 import Swal from 'sweetalert2';
-import { EmployeeForm } from '../../EmployeeManage/employee-form/employee-form';
+import { EmployeeForm } from '../../components/employee-form/employee-form';
 
 @Component({
   selector: 'app-employees-page',
