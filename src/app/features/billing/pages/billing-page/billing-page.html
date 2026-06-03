@@ -5,8 +5,15 @@
       <h1>Facturación</h1>
       <p>Gestiona las facturas y pagos de tu barbería</p>
     </div>
-    <div class="action-block">
-      <button class="primary-btn" (click)="downloadReport()">Generar informe mensual</button>
+
+      <div class="buttons-container">
+        <div class="action-block">
+          <button class="primary-btn" (click)="downloadReport()">Generar informe mensual</button>
+        </div>
+
+        <div class="action-block">
+          <button class="primary-btn" (click)="downloadDailyReport()">Generar informe diario</button>
+        </div>
     </div>
   </div>
 

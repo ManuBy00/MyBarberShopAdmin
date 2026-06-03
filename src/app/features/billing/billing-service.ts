@@ -53,6 +53,13 @@ export class BillingService {
   });
 }
 
+  downloadDailyReport(date: string) {
+    return this.http.get(`${this.apiUrl}/report/daily`, {
+      params: { date },
+      responseType: 'blob'
+    });
+  }
+
 
   
 }

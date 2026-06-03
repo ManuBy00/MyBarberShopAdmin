@@ -89,4 +89,16 @@ loadCards() {
   });
 }
 
+  downloadDailyReport() {
+    const selectedDate = this.date();
+    this.billingService.downloadDailyReport(selectedDate).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Informe_Diario_${selectedDate}.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }
+

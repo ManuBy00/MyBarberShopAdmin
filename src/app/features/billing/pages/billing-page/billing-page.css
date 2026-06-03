@@ -11,6 +11,11 @@
   margin-bottom: 2rem;
 }
 
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+}
+
 .primary-btn {
   background-color: #f89900; /* Tu naranja corporativo */
   color: white;

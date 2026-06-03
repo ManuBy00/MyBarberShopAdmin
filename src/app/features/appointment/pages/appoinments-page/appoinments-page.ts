@@ -179,6 +179,9 @@ updateAppointment(appointment: AppointmentRequest) {
     Swal.fire('No modificable', 'No se pueden modificar citas canceladas o completadas.', 'info');
     return;
   }
+
+
+
     this.appointmentService.updateAppointment(appointment.id ?? 0, appointment).subscribe({
         next: (updatedApp) => {
           Swal.fire('Actualizada', 'Cita modificada con éxito', 'success');
@@ -222,6 +225,7 @@ updateAppointment(appointment: AppointmentRequest) {
       paymentMethod: result.value,
       total: event.price
     };
+    
 
     this.billingService.createInvoice(invoiceReq).subscribe({
       next: () => {
@@ -239,6 +243,7 @@ updateAppointment(appointment: AppointmentRequest) {
         };
         //una vez generada factura, se actualiza la cita
         this.updateAppointment(appointmentReq);
+        
         Swal.fire('Éxito', 'Factura generada y cita completada', 'success');
       },
       error: () => Swal.fire('Error', 'No se pudo generar la factura', 'error')
